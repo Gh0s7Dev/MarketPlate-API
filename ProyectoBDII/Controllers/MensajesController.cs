@@ -122,6 +122,11 @@ namespace ProyectoBDII.Controllers
                 return Unauthorized(new { mensaje = "No tienes permiso para marcar este mensaje como leído" });
             }
 
+            if (mensaje.Leido)
+            {
+                return Unauthorized(new { mensaje = "Ya está dejado en visto este mensaje" });
+            }
+
             await _service.MarcarAsRead(conversacionId, fechaEnvio, mensajeId);
             return Ok(new { mensaje = "Mensaje marcado como leído correctamente" });
         }
